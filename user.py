@@ -2,12 +2,14 @@
 
 import os
 import urllib2
+from subprocess import call
 #import pprint
 
 #pprint.pprint(globals())
 #pprint.pprint(locals())
 
 mosurl = 'https://docs.google.com/spreadsheets/d/1Qde18KtJX8rrCtkrtfar8JlG9k8iizJmESvhzPgt_-Y/export?gid=0&format=csv'
+
 csvfile = urllib2.urlopen(mosurl)
 
 # Splitting lines by delimiter
@@ -18,3 +20,4 @@ while True:
         print namePair[0]
         #pprint.pprint(namePair);
 
+call(["useradd", "-m", namePair[0]])
