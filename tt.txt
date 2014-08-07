@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 vvvvasvvdv
 vvtvtvttvtvvt
+=======
+t2t2t2t2tt
+>>>>>>> secondary
