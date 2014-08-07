@@ -3,6 +3,10 @@
 import os
 import urllib2
 from subprocess import call
+
+import pwd
+import grp
+
 #import pprint
 
 #pprint.pprint(globals())
@@ -11,11 +15,25 @@ from subprocess import call
 HOMEDIR = "/home/"
 
 def createuser( name ):
-    print len(name)
+    call(["useradd", "-m", name])
+    upath = HOMEDIR + name + "/.ssh"
+    os.mkdirs(upath)
+    os.chmod(upath, 0700)
+    uid = pwd.getpwnam(name).pw_uid
+    gid = grp.getgrnam(name).gr_gid
+    os.chown(upath,uid,gid)
+    call(["usermod", name, "-a -G", "libvirtd"])
+    call(["usermod", name, " -s /bin/bash"])
+    #os.chown(upath,os.getuid(name),os.getgid(name))
     #call(["useradd", "-m", name])
 
 def addkey( name, key ):
-    print len(name), len(key)
+    #print len(name), len(key)
+    upath = HOMEDIR + name + "/.ssh/authorized_keys"
+    file = open(upath, "w")
+    file.write(key)
+    file.close()
+    os.chmod(upath, 0644)
 
 #mosurl = 'https://docs.google.com/spreadsheets/d/1Qde18KtJX8rrCtkrtfar8JlG9k8iizJmESvhzPgt_-Y/export?gid=0&format=csv'
 
@@ -37,6 +55,7 @@ while True:
             #createuser(namePair[0])
             addkey(namePair[0],namePair[1])
 
+csvfile.close()
         #pprint.pprint(namePair);
 
 #call(["useradd", "-m", namePair[0]])
