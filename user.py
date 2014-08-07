@@ -18,9 +18,3 @@ while True:
         #reader = csv.reader(buf,delimiter=',',quoting=csv.QUOTE_NONE)
         print buf.split(',')
 
-useradd -m vii
-mkdir -p /home/vii/.ssh
-wget -O /home/vii/.ssh/authorized_keys http://pxe-eu.webzilla.com/configs/freebsd/pubkeys/vii.pubkey
-chown -R vii:vii /home/vii
-chmod 700 /home/vii/.ssh
-chmod 644 /home/vii/.ssh/authorized_keys
