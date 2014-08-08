@@ -2,12 +2,13 @@
 
 import os
 import urllib2
-from subprocess import call
-
+import re
 import pwd
 import grp
 
 #import pprint
+
+from subprocess import call
 
 #pprint.pprint(globals())
 #pprint.pprint(locals())
@@ -29,6 +30,9 @@ def createuser( name ):
 
 def addkey( name, key ):
     #print len(name), len(key)
+    regexp = re.compile('^\s+?ssh-rsa\s+')
+    if regexp.search(key) is not None:
+        print 'matched'
     upath = HOMEDIR + name + "/.ssh/authorized_keys"
     file = open(upath, "w")
     file.write(key)
