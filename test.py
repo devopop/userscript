@@ -1,5 +1,4 @@
 #!/usr/bin/bash
 
-print 'Test1.2!'
-print 'Test1.5!'
+print 'Test1!'
 ptint 'Test2!'
